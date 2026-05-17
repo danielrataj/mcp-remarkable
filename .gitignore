@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+.env
+*.log
+remarkable-auth.json
+.remarkable-auth.json
+data/
+tmp-tests/
+tmp/

@@ -1,0 +1,41 @@
+{
+  "name": "mcp-remarkable",
+  "version": "0.1.0",
+  "description": "MCP server for uploading PDF documents to reMarkable.",
+  "type": "module",
+  "bin": {
+    "mcp-remarkable": "dist/index.js"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "lint": "npm run check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "generate:pdf": "tsx src/generate-pdf.ts",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "dev:watch": "tsx watch src/index.ts",
+    "docker:build": "docker compose build mcp-remarkable",
+    "docker:dev": "docker compose --profile dev run --rm mcp-remarkable-dev",
+    "docker:test": "docker compose build mcp-remarkable",
+    "docker:run": "docker compose run --rm mcp-remarkable"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "pdfkit": "0.18.0",
+    "rmapi-js": "9.0.3",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/pdfkit": "0.17.6",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.6"
+  }
+}

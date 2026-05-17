@@ -1,0 +1,37 @@
+services:
+  mcp-remarkable:
+    build:
+      context: .
+      target: runtime
+    image: mcp-remarkable:local
+    environment:
+      REMARKABLE_AUTH_PATH: /data/remarkable-auth.json
+    volumes:
+      - remarkable-data:/data
+      - .:/workspace:ro
+    stdin_open: true
+    tty: false
+
+  mcp-remarkable-dev:
+    profiles:
+      - dev
+    build:
+      context: .
+      target: deps
+    image: mcp-remarkable:dev
+    command: npm run dev:watch
+    environment:
+      REMARKABLE_AUTH_PATH: /data/remarkable-auth.json
+    volumes:
+      - remarkable-data:/data
+      - ./src:/app/src:ro
+      - ./tests:/app/tests:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+      - ./vitest.config.ts:/app/vitest.config.ts:ro
+      - ./package.json:/app/package.json:ro
+      - ./package-lock.json:/app/package-lock.json:ro
+    stdin_open: true
+    tty: false
+
+volumes:
+  remarkable-data:
